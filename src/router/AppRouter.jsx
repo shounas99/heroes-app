@@ -1,14 +1,15 @@
 // principal router
 
 import React from 'react'
-import { Login } from '../auth/pages/Login'
-import { Marvel } from '../heroes/pages/Marvel'
-import { Dc } from '../heroes/pages/Dc'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { Login } from '../auth'
+import { Marvel, Dc } from '../heroes'
+import { Navbar } from '../ui'
 
 export const AppRouter = () => {
   return (
     <>
+    <Navbar />
         <Routes>
             <Route path="marvel" element={ <Marvel/> }/>
             <Route path="dc" element={ <Dc/> }/>
