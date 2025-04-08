@@ -3,6 +3,7 @@ import queryString from 'query-string'
 
 import { useForm } from '../../hooks/useForm'
 import { HeroCard } from '../components'
+import { getHeroesByName } from '../helpers'
 
 export const Search = () => {
 
@@ -11,9 +12,10 @@ export const Search = () => {
 
   const { q = '' } = queryString.parse( location.search )
 
+  const heroes = getHeroesByName(q)
 
   const { searchText, onInputChange } = useForm({
-    searchText: '',
+    searchText: q,
   })
 
   const onSearchSubmit = ( event ) => {
@@ -21,9 +23,6 @@ export const Search = () => {
     if( searchText.trim().length <= 1) return;
 
     navigate(`?q=${ searchText }`)
-    location.search()
-    
-    
   }
 
 
@@ -64,7 +63,11 @@ export const Search = () => {
             No hero with <b>{ q }</b>
           </div>
 
-          {/* <HeroCard /> */}
+          {
+            heroes.map( hero => (
+              <HeroCard key={ hero.id } { ...hero }/>
+            ))
+          }
 
         </div>
       </div>
