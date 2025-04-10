@@ -1,1 +1,2 @@
-export * from './pages/index'
+export * from './pages'
+export * from './context'
