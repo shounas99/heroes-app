@@ -7,5 +7,5 @@ export const PublicRoute = ({ children }) => {
     //if the user is authenticated, they are redirected to marvel and don't have to see the login page
     return ( !logged )
         ? children
-        : <Navigate to='/marvel'/>
+        : <Navigate to='/marvel' />
 }

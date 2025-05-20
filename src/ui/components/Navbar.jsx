@@ -7,7 +7,7 @@ export const Navbar = () => {
 
     const navigate = useNavigate() //help us to navigation
     const { user, logout } = useContext( AuthContext )
-    
+
     const onLogout = () => {
         logout()
         navigate('/login', {
@@ -15,10 +15,8 @@ export const Navbar = () => {
         })
     }
 
-
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
-            
             <Link 
                 className="navbar-brand" 
                 to="/"
@@ -54,9 +52,7 @@ export const Navbar = () => {
 
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
                 <ul className="navbar-nav ml-auto">
-                    <span 
-                        className='nav-item nav-link text-primary'
-                    >
+                    <span className='nav-item nav-link text-primary'>
                         { user?.name }
                     </span>
                     <button

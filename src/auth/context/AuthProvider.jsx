@@ -1,15 +1,16 @@
-import { useReducer } from "react"
-import { AuthContext } from "./AuthContext"
-import { authReducer } from "./authReducer"
+import { useReducer } from 'react'
+import { AuthContext } from './AuthContext'
+import { authReducer } from './authReducer'
 
-import { types } from "../types/types"
+import { types } from '../types/types'
 
-const initialState = {
-    logged: false
-}
+// const initialState = {
+//     logged: false
+// }
 
 const init = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem('user'));
+
     return {
         logged: !!user, //if exists
         user: user,
@@ -17,30 +18,27 @@ const init = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    
-    const [authState, dispatch ] = useReducer( authReducer, initialState, init  )
+    const [authState, dispatch] = useReducer( authReducer, {}, init)
 
-    const login = ( name = '') => {
-        const user = { id: 'ABC', name}
+    const login = (name = '') => {
+        const user = {id: 'ABC', name}
         const action = { type: types.login, payload: user }
-
-        localStorage.setItem('user', JSON.stringify( user ))
-
+        localStorage.setItem('user', JSON.stringify( user ));
         dispatch(action)
     }
 
     const logout = () => {
         localStorage.removeItem('user')
-        const action = { types: types.logout }
+        const action = { type: types.logout }
         dispatch( action )
     }
 
     return (
-        <AuthContext.Provider value={{ 
-            ...authState,
-            //mehthods
-            login: login,
-            logout: logout
+        <AuthContext.Provider value={{
+        ...authState,
+        // methods
+        login,
+        logout,
         }}>
             { children }
         </AuthContext.Provider>
